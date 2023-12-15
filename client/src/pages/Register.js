@@ -20,7 +20,7 @@ const Register = () => {
 
   return (
     <div className="container">
-      <h1>Sign In</h1>
+      <h1>Register</h1>
       <form>
         <div className="form-body">
           <input type="text" required />
@@ -30,9 +30,12 @@ const Register = () => {
           <input type="password" required />
           <label>Password</label>
         </div>
-
-        <button className="btn">Login</button>
-        <p className="text">Dont have an account? <a href="/">Register here!</a></p>
+        <div className="form-body">
+          <input type="password" required />
+          <label>Confirm Password</label>
+        </div>
+        <button className="btn">Register</button>
+        <p className="text">Already have an account? <a href="/">Login here!</a></p>
       </form>
     </div>
   );
