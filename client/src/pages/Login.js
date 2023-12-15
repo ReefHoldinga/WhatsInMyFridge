@@ -32,7 +32,7 @@ const Login = () => {
         </div>
 
         <button className="btn">Login</button>
-        <p className="text">Don't have an account? <a href="/">Register here!</a></p>
+        <p className="text">Don't have an account? <a href="/register">Register here!</a></p>
       </form>
     </div>
   );
