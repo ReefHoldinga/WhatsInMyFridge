@@ -68,6 +68,7 @@ body {
   top: 15px;
   left: 0px;
   color: rgba(255, 105, 97);
+  white-space: pre;
 }
 
 .form-body input:focus, .form-body input:valid {
