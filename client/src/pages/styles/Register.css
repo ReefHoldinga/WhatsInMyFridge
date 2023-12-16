@@ -2,7 +2,7 @@
   box-sizing: border-box;
 }
 
-body {
+.register-body {
   background-color: rgba(255, 105, 97);
   color: rgba(255, 105, 97);
   display: flex;
@@ -67,6 +67,7 @@ body {
   left: 0px;
   color: rgba(255, 105, 97);
   pointer-events: none;
+  white-space: pre;
 }
 
 .form-body input:focus, .form-body input:valid {

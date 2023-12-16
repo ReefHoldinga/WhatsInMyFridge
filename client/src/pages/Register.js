@@ -15,7 +15,17 @@ const Register = () => {
         span.style.transitionDelay = `${idx * 50}ms`;
         label.appendChild(span);
       });
-    });
+    }); 
+  }, []);
+
+  useEffect(()=> {
+    // Add class to the body element
+    document.body.classList.add('register-body');
+
+    // Remove the class when the component unmounts
+    return () => {
+      document.body.classList.remove('register-body');
+    }
   }, []);
 
   return (
@@ -32,7 +42,7 @@ const Register = () => {
         </div>
         <div className="form-body">
           <input type="password" required />
-          <label>Confirm  Password</label>
+          <label>Confirm Password</label>
         </div>
         <button className="btn">Register</button>
         <p className="text">Already have an account? <a href="/">Login here!</a></p>

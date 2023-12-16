@@ -2,7 +2,7 @@
   box-sizing: border-box;
 }
 
-body {
+.login-body {
   background-color: rgba(255, 105, 97);
   color: rgba(255, 105, 97);
   display: flex;

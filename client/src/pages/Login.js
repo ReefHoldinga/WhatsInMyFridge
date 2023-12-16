@@ -18,6 +18,16 @@ const Login = () => {
     });
   }, []);
 
+  useEffect(()=> {
+    // Add class to the body element
+    document.body.classList.add('login-body');
+
+    // Remove the class when the component unmounts
+    return () => {
+      document.body.classList.remove('login-body');
+    }
+  }, []);
+
   return (
     <div className="container">
       <h1>Sign In</h1>
