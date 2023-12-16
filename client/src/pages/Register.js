@@ -32,7 +32,7 @@ const Register = () => {
         </div>
         <div className="form-body">
           <input type="password" required />
-          <label>Confirm Password</label>
+          <label>Confirm  Password</label>
         </div>
         <button className="btn">Register</button>
         <p className="text">Already have an account? <a href="/">Login here!</a></p>
