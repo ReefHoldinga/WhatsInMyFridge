@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./styles/Register.css";
 
 const Register = () => {
@@ -28,20 +28,59 @@ const Register = () => {
     }
   }, []);
 
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const user = {email, password}
+
+    const response = await fetch('/api/users/register', {
+      method: 'POST',
+      body: JSON.stringify(user),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    const json = await response.json()
+
+    if (!response.ok) {
+      setError(json.error)
+    }
+
+    if (response.ok) {
+      setEmail('')
+      setPassword('')
+      setError(null)
+      console.log('New user added', json)
+    }
+  }
+
+
   return (
     <div className="container">
       <h1>Register</h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="form-body">
           <input type="text" required />
           <label>Email</label>
         </div>
         <div className="form-body">
-          <input type="password" required />
+          <input 
+            type="password" 
+            required
+            onChange={(e) => setEmail(e.target.value)}
+          />
           <label>Password</label>
         </div>
         <div className="form-body">
-          <input type="password" required />
+          <input 
+            type="password" 
+            required
+            onChange={(e) => setPassword(e.target.value)}
+          />
           <label>Confirm Password</label>
         </div>
         <button className="btn">Register</button>
