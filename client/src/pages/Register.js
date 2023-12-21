@@ -30,6 +30,7 @@ const Register = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirm, setConfirm] = useState('');
   const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
@@ -37,24 +38,35 @@ const Register = () => {
 
     const user = {email, password}
 
-    const response = await fetch('/api/users/register', {
+    // console.log(`Confirm: ${confirm}, Password: ${password}`)
+
+    if(password !== confirm) {
+      console.log('Passwords do not match. Please try again.');
+      return;
+    }
+    
+    const response = await fetch('api/users/register', {
       method: 'POST',
       body: JSON.stringify(user),
       headers: {
         'Content-Type': 'application/json'
       }
     })
+
     const json = await response.json()
 
     if (!response.ok) {
-      setError(json.error)
+      setError(json)
+      console.log(error)
     }
 
     if (response.ok) {
       setEmail('')
       setPassword('')
+      setConfirm('')
       setError(null)
       console.log('New user added', json)
+      window.location.replace("http://localhost:3000");
     }
   }
 
@@ -64,14 +76,18 @@ const Register = () => {
       <h1>Register</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-body">
-          <input type="text" required />
+          <input 
+            type="text" 
+            required
+            onChange={(e) => setEmail(e.target.value)}
+          />
           <label>Email</label>
         </div>
         <div className="form-body">
           <input 
             type="password" 
             required
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <label>Password</label>
         </div>
@@ -79,7 +95,7 @@ const Register = () => {
           <input 
             type="password" 
             required
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => setConfirm(e.target.value)}
           />
           <label>Confirm Password</label>
         </div>
