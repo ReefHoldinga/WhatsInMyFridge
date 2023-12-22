@@ -17,7 +17,7 @@ const login = async (req, res) => {
   if(!passStatus) {
     return res.status(400).json({error: 'INCORRECT PASSWORD'})
   }
-  
+  console.log('hola')
   return res.status(200).json('Login Successful')
 }
 

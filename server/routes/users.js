@@ -7,7 +7,7 @@ const {
 const router = express.Router()
 
 // login
-router.get('/login', login)
+router.post('/login', login)
 
 // register
 router.post('/register', register)
