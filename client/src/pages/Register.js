@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./styles/Register.css";
 
+const errors = document.getElementsByClassName('error');
+
 const Register = () => {
   useEffect(() => {
     const labels = document.querySelectorAll('.form-body label');
@@ -31,17 +33,27 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const user = {email, password}
+    const user = {email, password};
 
-    // console.log(`Confirm: ${confirm}, Password: ${password}`)
+    if(!checkPassStrength(password)) {
+      resetErrors(errors);
+      errors[2].style.visibility = "visible";
+      errors[2].style.position = "relative";
+      return;
+    }
 
     if(password !== confirm) {
+
+      resetErrors(errors); // will reset errors so only one will show at a time
+
       console.log('Passwords do not match. Please try again.');
+      errors[3].style.visibility = "visible";
+      errors[3].style.position = "relative";
       return;
     }
     
@@ -51,13 +63,18 @@ const Register = () => {
       headers: {
         'Content-Type': 'application/json'
       }
-    })
+    });
 
-    const json = await response.json()
+    const json = await response.json();
 
     if (!response.ok) {
-      setError(json)
-      console.log(error)
+      setError(json);
+      console.log(error);
+      if(json === 'EMAIL ALREADY EXISTS') {
+        resetErrors(errors); // will reset errors so only one will show at a time
+        errors[0].style.visibility = "visible";
+        errors[0].style.position = "relative";
+      }
     }
 
     if (response.ok) {
@@ -70,6 +87,21 @@ const Register = () => {
     }
   }
 
+  const resetErrors = ((errors) => {
+    errors = Array.from(errors)
+    errors.forEach((error) => {
+      error.style.visibility = "hidden";
+      error.style.position = "absolute";
+    })
+  });
+
+  const checkPassStrength = ((password) => {
+    const passTest = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/; // ensures atleast 8 chars, one upper, one lower, one num, and one symbol
+    if(passTest.test(password)) {
+      return true;
+    }
+    return false;
+  })
 
   return (
     <div className="container">
@@ -77,7 +109,7 @@ const Register = () => {
       <form onSubmit={handleSubmit}>
         <div className="form-body">
           <input 
-            type="text" 
+            type="email" 
             required
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -99,6 +131,12 @@ const Register = () => {
           />
           <label>Confirm Password</label>
         </div>
+
+        <p className="error email registered">This email is already registered.</p>
+        <p className="error email invalid">Invalid email address</p>
+        <p className="error pass weak">Please input a stronger password</p>
+        <p className="error pass diff">Your passwords do not match.</p>
+
         <button className="btn">Register</button>
         <p className="text">Already have an account? <a href="/">Login here!</a></p>
       </form>

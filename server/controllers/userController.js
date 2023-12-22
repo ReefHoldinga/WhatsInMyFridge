@@ -35,8 +35,8 @@ const register = async (req, res) => {
       return res.status(400).json({error: error.message})
     }
   }
-
-  res.status(400).json('EMAIL ALREADY EXISTS')
+  
+  return res.status(400).json('EMAIL ALREADY EXISTS')
 }
 
 const deleteUser = async (req, res) => {
