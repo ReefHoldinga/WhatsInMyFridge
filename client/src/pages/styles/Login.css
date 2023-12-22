@@ -87,6 +87,12 @@
   transform: translateY(-30px);
 }
 
+.error {
+  visibility: hidden;
+  position: absolute;
+  color: rgba(122, 6, 0);
+}
+
 .btn {
   cursor: pointer;
   display: inline-block;
