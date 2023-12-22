@@ -101,7 +101,11 @@ const Register = () => {
       return true;
     }
     return false;
-  })
+  });
+
+  const togglePass = (() => {
+    
+  });
 
   return (
     <div className="container">

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./styles/Login.css";
 
 const errorMsg = document.getElementsByClassName('error');
+const reset = document.getElementsByClassName('reset');
 
 const Login = () => {
   useEffect(() => {
@@ -54,9 +55,11 @@ const Login = () => {
       console.log(error);
       errorMsg[0].style.visibility = "visible";
       errorMsg[0].style.position = "relative";
+      reset[0].style.visibility = "hidden";
+      reset[0].style.position = "absolute";
+    } else {
+      window.location.replace("http://localhost:3000/home");
     }
-
-    window.location.replace("http://localhost:3000/home");
   };
   
   return (
@@ -80,6 +83,7 @@ const Login = () => {
           <label>Password</label>
         </div>
 
+        <p className="reset"><a href="">Reset Password</a></p>
         <p className="error">Incorrect email or password. <a href="">Reset here.</a></p>
 
         <button className="btn">Login</button>
