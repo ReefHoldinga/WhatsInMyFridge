@@ -96,10 +96,12 @@ const Register = () => {
   });
 
   const checkPassStrength = ((password) => {
-    const passTest = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/; // ensures atleast 8 chars, one upper, one lower, one num, and one symbol
+    const passTest = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[/.@$!%*?&,])[A-Za-z\d/.@$!%*?&,]{8,}$/; // ensures atleast 8 chars, one upper, one lower, one num, and one symbol
+    console.log(passTest.test(password))
     if(passTest.test(password)) {
       return true;
     }
+
     return false;
   });
 

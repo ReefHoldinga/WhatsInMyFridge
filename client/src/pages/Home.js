@@ -15,14 +15,69 @@ const Home = () => {
   return (
     <div className="home-container">
       <nav className="navbar">
-        <li>Navbar (Hello Name)</li>
-        <li>X items Expiring Soon!</li> 
-        <li>Logout</li>
+        <ul>
+          <li><h1>Hello Reef!</h1></li>
+          <li>
+            X items Expiring Soon!
+            <ol className="click-me"> Click to view expiring soon.</ol>
+          </li>
+          <li>
+            Running Low on X Items!
+            <ol className="click-me">Click to view items that are running low.</ol>
+          </li> 
+          <li className="settings">
+            <button>Settings</button>
+          </li>
+          <li className="logout">
+            <button>Logout</button>
+          </li>
+        </ul>
       </nav>
-      <main className="main-body">Main Body</main>
-      <aside className="details">Specific details</aside>
-      <div className="logo-container">Logo</div>
-    </div>
+      <main className="main-body">
+        <div className="item-container">
+          <h2>Peanut Butter</h2>
+          <p>Expires 10/25</p>
+          <p>Section: Pantry</p>
+          <p>Amount: 1 jar</p>
+        </div>
+
+        <div className="item-container">
+          <h2>Peanut Butter</h2>
+          <p>Expires 10/25</p>
+          <p>Section: Pantry</p>
+          <p>Amount: 1 jar</p>
+        </div>
+
+        <div className="item-container">
+          <h2>Peanut Butter</h2>
+          <p>Expires 10/25</p>
+          <p>Section: Pantry</p>
+          <p>Amount: 1 jar</p>
+        </div>
+
+        <div className="item-container">
+          <h2>Peanut Butter</h2>
+          <p>Expires 10/25</p>
+          <p>Section: Pantry</p>
+          <p>Amount: 1 jar</p>
+        </div>
+
+      </main>
+      <div className="storage-container">
+        <aside className="storage">
+          <h2>Categories</h2>
+        </aside>
+        <aside className="storage inactive">
+          <h2>Fridge</h2>
+        </aside>
+        <aside className="storage inactive">
+          <h2>Pantry</h2>
+        </aside>
+        <aside className="storage inactive">
+          <h2>Freezer</h2>
+        </aside>
+      </div>
+    </div>  
   )
 }
 
