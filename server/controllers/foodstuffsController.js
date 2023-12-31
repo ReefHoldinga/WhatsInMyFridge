@@ -9,16 +9,24 @@ const getFoodstuffs = async (req, res) => {
 
 // post a food item
 const addFoodstuff = async (req, res) => {
-  const {title, expiration_date, label, amount} = req.body
+  const {name, expires, section, amount} = req.body
 
   let emptyFields = []
 
-  if(!title) {
-    emptyFields.push('title')
+  if(!name) {
+    emptyFields.push('name')
   }
 
-  if(!expiration_date) {
-    emptyFields.push('expiration_date')
+  if(!expires) {
+    emptyFields.push('expires')
+  }
+
+  if(!section) {
+    emptyFields.push('section')
+  }
+
+  if(!amount) {
+    emptyFields.push('amount')
   }
 
   
@@ -28,7 +36,7 @@ const addFoodstuff = async (req, res) => {
 
   // add to db
   try {
-    const item = await Foodstuffs.create({title, expiration_date, label, amount})
+    const item = await Foodstuffs.create({name, expires, section, amount})
     res.status(200).json(item)
   } catch (error) {
     res.status(400).json({error: error.message})

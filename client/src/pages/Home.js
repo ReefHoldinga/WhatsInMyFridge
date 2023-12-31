@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./styles/Home.css";
-
-const categories = document.querySelectorAll('storage-container');
+import '@fortawesome/fontawesome-free/css/all.css';
 
 const Home = () => {
+
+  const [mainContent, setMainContent] = useState([]);
+
   useEffect(()=> {
     // Add class to the body element
     document.body.classList.add('home-body');
@@ -14,68 +16,88 @@ const Home = () => {
     }
   }, []);
 
+  // const displayItem = (event) => {
+  //   const item = event.currentTarget.closest('h2').innerText.trim(); // gets clicked container
+  //   const parent = event.currentTarget.closest('div'); // gets entire storage container
+
+  //   parent.querySelectorAll('.storage').forEach((child) => {
+  //     child.remove();
+  //   }) REPURPOSE FOR SETTING ACTIVE CLASS TO CATAEGORY TAB
+      // console.log(parent);
+    // console.log(item);
+  // }
+
+  // configure backend to support adding items to db
+  // set up click event on each category tab
+  // inject HTML consisting of items
+
+  const addItem = async (e) => {
+    e.preventDefault();
+
+    const item = {
+      name: 'Peanuts',
+      expires: '10/26',
+      section: 'Pantry',
+      amount: '0.5lbs',
+    };
+
+    setMainContent((prevContent) => [...prevContent, item]);
+
+    // add item to db
+    const response = await fetch('/api/foodstuffs/add', {
+      method: 'POST',
+      body: JSON.stringify(item),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const json = await response.json();
+    console.log(json);
+  };
+
   return (
-    <div class="home-container">
-    <nav class="navbar">
+    <div className="home-container">
+    <nav className="navbar">
       <ul>
         <li><h1>Hello Reef!</h1></li>
         <li>
           X items Expiring Soon!
-          <ol class="click-me"> Click to view expiring soon.</ol>
+          <ol className="click-me"> Click to view expiring soon.</ol>
         </li>
         <li>
           Running Low on X Items!
-          <ol class="click-me">Click to view items that are running low.</ol>
+          <ol className="click-me">Click to view items that are running low.</ol>
         </li> 
-        <li class="settings">
+        <li className="settings">
           <button>Settings</button>
         </li>
-        <li class="logout">
+        <li className="logout">
           <button>Logout</button>
         </li>
       </ul>
     </nav>
-    <main class="main-body">
-      <div class="item-container">
-        <h2>Peanut Butter</h2>
-        <p>Expires 10/25</p>
-        <p>Section: Pantry</p>
-        <p>Amount: 1 jar</p>
-      </div>
-
-      <div class="item-container">
-        <h2>Peanut Butter</h2>
-        <p>Expires 10/25</p>
-        <p>Section: Pantry</p>
-        <p>Amount: 1 jar</p>
-      </div>
-
-      <div class="item-container">
-        <h2>Peanut Butter</h2>
-        <p>Expires 10/25</p>
-        <p>Section: Pantry</p>
-        <p>Amount: 1 jar</p>
-      </div>
-
-      <div class="item-container">
-        <h2>Peanut Butter</h2>
-        <p>Expires 10/25</p>
-        <p>Section: Pantry</p>
-        <p>Amount: 1 jar</p>
-      </div>
-
+    <main className="main-body">
+      {mainContent.map((item) => (
+          <div className="item-container" key={item.id}>
+            <h2>{item.name}</h2>
+            <p>Expires {item.expires}</p>
+            <p className="section">Section: {item.section}</p>
+            <p>Amount: {item.amount}</p>
+          </div>
+        ))}
     </main>
-    <div class="storage-container">
-      <aside class="storage">
+    <div className="storage-container">
+      <aside className="storage">
         <h2>Categories</h2>
       </aside>
-      <aside class="storage inactive">
-        <h2>Fridge</h2>
+      <aside className="storage inactive">
+        <h2>Fridge <i className="fa-solid fa-plus" onClick={addItem}></i></h2>
       </aside>
-      <aside class="storage inactive">
+      <aside className="storage">
         <h2>Pantry</h2>
       </aside>
-      <aside class="storage inactive">
+      <aside className="storage inactive">
         <h2>Freezer</h2>
       </aside>
     </div>
