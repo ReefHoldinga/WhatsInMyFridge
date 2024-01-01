@@ -6,6 +6,10 @@ const Home = () => {
 
   const [mainContent, setMainContent] = useState([]);
 
+  const changeType = (e) => {
+    e.target.type = 'date'
+  }
+
   useEffect(()=> {
     // Add class to the body element
     document.body.classList.add('home-body');
@@ -56,52 +60,93 @@ const Home = () => {
     console.log(json);
   };
 
+  // const handleSubmit = async (e) => {
+  //   const [food, setFood] = useState('');
+  //   const [date, setDate] = useState('');
+  //   const [section, setSection] = useState('');
+  //   const [amount, setAmount] = useState('');
+  // }
+
   return (
-    <div className="home-container">
-    <nav className="navbar">
-      <ul>
-        <li><h1>Hello Reef!</h1></li>
-        <li>
-          X items Expiring Soon!
-          <ol className="click-me"> Click to view expiring soon.</ol>
-        </li>
-        <li>
-          Running Low on X Items!
-          <ol className="click-me">Click to view items that are running low.</ol>
-        </li> 
-        <li className="settings">
-          <button>Settings</button>
-        </li>
-        <li className="logout">
-          <button>Logout</button>
-        </li>
-      </ul>
-    </nav>
-    <main className="main-body">
-      {mainContent.map((item) => (
-          <div className="item-container" key={item.id}>
-            <h2>{item.name}</h2>
-            <p>Expires {item.expires}</p>
-            <p className="section">Section: {item.section}</p>
-            <p>Amount: {item.amount}</p>
-          </div>
-        ))}
-    </main>
-    <div className="storage-container">
-      <aside className="storage">
-        <h2>Categories</h2>
-      </aside>
-      <aside className="storage inactive">
-        <h2>Fridge <i className="fa-solid fa-plus" onClick={addItem}></i></h2>
-      </aside>
-      <aside className="storage">
-        <h2>Pantry</h2>
-      </aside>
-      <aside className="storage inactive">
-        <h2>Freezer</h2>
-      </aside>
-    </div>
-  </div>  
+    <>
+      <div className="overlay"></div>
+      <div className="home-container">
+        <nav className="navbar">
+          <ul>
+            <li><h1>Hello Reef!</h1></li>
+            <li>
+              X items Expiring Soon!
+              <ol className="click-me"> Click to view expiring soon.</ol>
+            </li>
+            <li>
+              Running Low on X Items!
+              <ol className="click-me">Click to view items that are running low.</ol>
+            </li> 
+            <li className="settings">
+              <button>Settings</button>
+            </li>
+            <li className="logout">
+              <button>Logout</button>
+            </li>
+          </ul>
+        </nav>
+
+        <div className="add">
+          <form>
+            <input 
+              type="text"
+              required
+              placeholder="Food or Drink"
+              // onChange={(e) => setFood(e.target.value)} 
+            />
+            <input 
+              type="text"
+              required
+              placeholder="Expiration Date"
+              onFocus={changeType}
+              // onChange={(e) => setDate(e.target.value)} 
+            />
+            <input 
+              type="text"
+              required
+              placeholder="Section"
+              // onChange={(e) => setSection(e.target.value)} 
+            />
+            <input 
+              type="text"
+              required
+              placeholder="Amount"
+              // onChange={(e) => setAmount(e.target.value)} 
+            />
+          </form>
+        </div>
+
+        <main className="main-body">
+          {mainContent.map((item) => (
+              <div className="item-container" key={item.id}>
+                <h2>{item.name}</h2>
+                <p>Expires {item.expires}</p>
+                <p className="section">Section: {item.section}</p>
+                <p>Amount: {item.amount}</p>
+              </div>
+            ))}
+        </main>
+        <div className="storage-container">
+          <aside className="storage">
+            <h2>Categories</h2>
+          </aside>
+          <aside className="storage inactive">
+            <h2>Fridge <i className="fa-solid fa-plus" onClick={addItem}></i></h2>
+          </aside>
+          <aside className="storage">
+            <h2>Pantry</h2>
+          </aside>
+          <aside className="storage inactive">
+            <h2>Freezer</h2>
+          </aside>
+        </div>
+      </div> 
+    </>
   )
 }
 

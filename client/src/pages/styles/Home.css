@@ -4,13 +4,23 @@
   margin: 0px; 
   box-sizing: border-box;
   height: 100vh;
-  background-color: white;
+  /* background-color: white; */
   overflow-x: hidden;
 }
 
 ul, li, ol {
   padding: 0;
   list-style-type: none;
+}
+
+.overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 4999;
 }
 
 .home-container {
@@ -113,6 +123,49 @@ ul, li, ol {
   background-color: rgba(122, 6, 0);
   border: 2px solid rgba(122, 6, 0);
   border-top-left-radius: 8px;
+}
+
+.add {
+  position: absolute;
+  right: 50%;
+  transform: translateX(50%);
+  top: 15%;
+  border: solid rgba(255, 105, 97);
+  padding: 20px;
+  border-radius: 20px;
+  /* visibility: hidden; */
+  z-index: 5000;
+  background-color: white;
+}
+
+.add form {
+  display: flex;
+  flex-direction: column;
+}
+
+.add form input {
+  padding: 30px;
+  margin: 10px;
+  border: none;
+  border-bottom: rgba(255, 105, 97) solid;
+  font-size: 2em;
+}
+
+.add form input::placeholder {
+  color: rgba(255, 105, 97);
+}
+
+.add form input:hover::placeholder, .add form input:focus::placeholder {
+  color: rgba(122, 6, 0);
+}
+
+.add form input:hover {
+  border-bottom: rgba(122, 6, 0) solid;
+}
+
+.add form input:focus {
+  outline: none;
+  border-bottom: rgba(122, 6, 0) solid;
 }
 
 .main-body {
