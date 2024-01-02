@@ -21,6 +21,7 @@ ul, li, ol {
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
   z-index: 4999;
+  visibility: hidden;
 }
 
 .home-container {
@@ -136,6 +137,18 @@ ul, li, ol {
   /* visibility: hidden; */
   z-index: 5000;
   background-color: white;
+  visibility: hidden;
+}
+
+.add i {
+  color: rgba(255, 105, 97);
+  font-size: 1.5em;
+  position: absolute;
+  right: 30px;
+}
+
+.add i:hover {
+  color: rgba(122, 6, 0);
 }
 
 .add form {

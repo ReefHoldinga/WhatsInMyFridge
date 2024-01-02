@@ -5,9 +5,20 @@ import '@fortawesome/fontawesome-free/css/all.css';
 const Home = () => {
 
   const [mainContent, setMainContent] = useState([]);
+  const [food, setFood] = useState('');
+  const [date, setDate] = useState('');
+  const [section, setSection] = useState('');
+  const [amount, setAmount] = useState('');
+
+  // const overlay = document.querySelector('.overlay');
 
   const changeType = (e) => {
     e.target.type = 'date'
+  }
+
+  const closePopup = (e) => {
+    document.querySelector('.overlay').style.visibility='hidden';
+    e.target.parentNode.style.visibility = 'hidden';
   }
 
   useEffect(()=> {
@@ -38,14 +49,15 @@ const Home = () => {
   const addItem = async (e) => {
     e.preventDefault();
 
-    const item = {
-      name: 'Peanuts',
-      expires: '10/26',
-      section: 'Pantry',
-      amount: '0.5lbs',
+    let item = {
+      name: food,
+      expires: date,
+      section: section,
+      amount: amount,
     };
 
-    setMainContent((prevContent) => [...prevContent, item]);
+    document.querySelector('.overlay').style.visibility='visible';
+    document.querySelector('.add').style.visibility='visible';
 
     // add item to db
     const response = await fetch('/api/foodstuffs/add', {
@@ -56,16 +68,13 @@ const Home = () => {
       }
     });
 
+    setMainContent((prevContent) => [...prevContent, item]);
+
     const json = await response.json();
     console.log(json);
-  };
 
-  // const handleSubmit = async (e) => {
-  //   const [food, setFood] = useState('');
-  //   const [date, setDate] = useState('');
-  //   const [section, setSection] = useState('');
-  //   const [amount, setAmount] = useState('');
-  // }
+    item = null;
+  };
 
   return (
     <>
@@ -92,31 +101,32 @@ const Home = () => {
         </nav>
 
         <div className="add">
+          <i className="fa-solid fa-x" onClick={closePopup}></i>
           <form>
             <input 
               type="text"
               required
               placeholder="Food or Drink"
-              // onChange={(e) => setFood(e.target.value)} 
+              onChange={(e) => setFood(e.target.value)} 
             />
             <input 
               type="text"
               required
               placeholder="Expiration Date"
               onFocus={changeType}
-              // onChange={(e) => setDate(e.target.value)} 
+              onChange={(e) => setDate(e.target.value)} 
             />
             <input 
               type="text"
               required
               placeholder="Section"
-              // onChange={(e) => setSection(e.target.value)} 
+              onChange={(e) => setSection(e.target.value)} 
             />
             <input 
               type="text"
               required
               placeholder="Amount"
-              // onChange={(e) => setAmount(e.target.value)} 
+              onChange={(e) => setAmount(e.target.value)} 
             />
           </form>
         </div>
