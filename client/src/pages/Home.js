@@ -18,7 +18,7 @@ const Home = () => {
 
   const closePopup = (e) => {
     document.querySelector('.overlay').style.visibility='hidden';
-    e.target.parentNode.style.visibility = 'hidden';
+    document.querySelector('.add').style.visibility='hidden';
   }
 
   useEffect(()=> {
@@ -46,18 +46,20 @@ const Home = () => {
   // set up click event on each category tab
   // inject HTML consisting of items
 
-  const addItem = async (e) => {
+  const toggleOverlay = (e) => {
     e.preventDefault();
 
+    document.querySelector('.overlay').style.visibility='visible';
+    document.querySelector('.add').style.visibility='visible';
+  };
+
+  const addItem = async (e) => {
     let item = {
       name: food,
       expires: date,
       section: section,
       amount: amount,
     };
-
-    document.querySelector('.overlay').style.visibility='visible';
-    document.querySelector('.add').style.visibility='visible';
 
     // add item to db
     const response = await fetch('/api/foodstuffs/add', {
@@ -73,8 +75,8 @@ const Home = () => {
     const json = await response.json();
     console.log(json);
 
-    item = null;
-  };
+    closePopup();
+  }
 
   return (
     <>
@@ -129,6 +131,7 @@ const Home = () => {
               onChange={(e) => setAmount(e.target.value)} 
             />
           </form>
+          <i class="fa-solid fa-arrow-right" onClick={addItem}></i>
         </div>
 
         <main className="main-body">
@@ -146,7 +149,7 @@ const Home = () => {
             <h2>Categories</h2>
           </aside>
           <aside className="storage inactive">
-            <h2>Fridge <i className="fa-solid fa-plus" onClick={addItem}></i></h2>
+            <h2>Fridge <i className="fa-solid fa-plus" onClick={toggleOverlay}></i></h2>
           </aside>
           <aside className="storage">
             <h2>Pantry</h2>
