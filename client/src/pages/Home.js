@@ -76,6 +76,7 @@ const Home = () => {
     console.log(json);
 
     closePopup();
+    document.querySelector('.add form').reset();
   }
 
   return (
