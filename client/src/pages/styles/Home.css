@@ -154,9 +154,14 @@ ul, li, ol {
 .form-nav-container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .form-nav-container p{
+  font-size: 1.5em;
+  color: rgba(122, 6, 0);
+  text-decoration: underline;
+  font-weight: bold;
   visibility: hidden;
 }
 

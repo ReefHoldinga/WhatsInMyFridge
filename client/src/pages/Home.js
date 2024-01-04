@@ -20,6 +20,7 @@ const Home = () => {
   const closePopup = (e) => {
     document.querySelector('.overlay').style.visibility='hidden';
     document.querySelector('.add').style.visibility='hidden';
+    document.querySelector('.form-nav-container p').style.visibility="hidden";
   }
 
   useEffect(()=> {
