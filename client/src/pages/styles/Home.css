@@ -142,13 +142,22 @@ ul, li, ol {
 
 .add i {
   color: rgba(255, 105, 97);
-  font-size: 1.5em;
-  position: absolute;
-  right: 30px;
+  font-size: 1.75em;
+  margin: 10px;
 }
 
 .add i:hover {
   color: rgba(122, 6, 0);
+  scale: calc(1.02);
+}
+
+.form-nav-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-nav-container p{
+  visibility: hidden;
 }
 
 .add form {

@@ -10,6 +10,7 @@ const Home = () => {
   const [section, setSection] = useState('');
   const [amount, setAmount] = useState('');
 
+
   // const overlay = document.querySelector('.overlay');
 
   const changeType = (e) => {
@@ -70,13 +71,17 @@ const Home = () => {
       }
     });
 
-    setMainContent((prevContent) => [...prevContent, item]);
-
     const json = await response.json();
     console.log(json);
 
-    closePopup();
-    document.querySelector('.add form').reset();
+    if(response.ok) {
+      setMainContent((prevContent) => [...prevContent, item]);
+      closePopup();
+      document.querySelector('.add form').reset();
+    } else {
+      document.querySelector('.form-nav-container p').style.visibility="visible";
+    }
+    
   }
 
   return (
@@ -104,7 +109,6 @@ const Home = () => {
         </nav>
 
         <div className="add">
-          <i className="fa-solid fa-x" onClick={closePopup}></i>
           <form>
             <input 
               type="text"
@@ -132,7 +136,11 @@ const Home = () => {
               onChange={(e) => setAmount(e.target.value)} 
             />
           </form>
-          <i class="fa-solid fa-arrow-right" onClick={addItem}></i>
+          <div className="form-nav-container">
+            <i className="fa-solid fa-x" onClick={closePopup}></i>
+            <p>Please fill out all form options!</p>
+            <i class="fa-solid fa-arrow-right" onClick={addItem}></i>
+          </div>
         </div>
 
         <main className="main-body">
