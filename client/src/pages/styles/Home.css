@@ -72,58 +72,39 @@ ul, li, ol {
 
 .navbar ol.click-me:hover {
   font-weight: bold;
+  cursor: pointer;
 }
 
 .navbar ol.click-me:active, .navbar button:active {
   transform: scale(0.98);
 }
 
-.navbar .logout button {
+.nav-btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-btn-container button {
   text-decoration: underline;
   color: rgba(122, 6, 0);
   background-color: rgba(255, 105, 97);
   border: none;
   padding: 8px 20px;
   font-size: 1rem;
-  position: absolute;
   left: 0;
   bottom: 0;
 }
 
-.navbar .settings button {
+.nav-btn-container button:hover {
   text-decoration: underline;
-  color: rgba(122, 6, 0);
-  background-color: rgba(255, 105, 97);
-  border: none;
-  padding: 8px 20px;
-  font-size: 1rem;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-}
-
-.logout {
-  align-self: center;
+  font-weight: bold;
+  scale: calc(1.1);
+  cursor: pointer;
 }
 
 .navbar h1 {
   margin-bottom: 0px;
-}
-
-.navbar .logout button:hover {
-  text-decoration: none;
-  color: white;
-  background-color: rgba(122, 6, 0);
-  border: 2px solid rgba(122, 6, 0);
-  border-top-right-radius: 8px;
-}
-
-.navbar .settings button:hover {
-  text-decoration: none;
-  color: white;
-  background-color: rgba(122, 6, 0);
-  border: 2px solid rgba(122, 6, 0);
-  border-top-left-radius: 8px;
 }
 
 .add {
@@ -149,6 +130,7 @@ ul, li, ol {
 .add i:hover {
   color: rgba(122, 6, 0);
   scale: calc(1.02);
+  cursor: pointer;
 }
 
 .form-nav-container {
@@ -184,10 +166,12 @@ ul, li, ol {
 
 .add form input:hover::placeholder, .add form input:focus::placeholder {
   color: rgba(122, 6, 0);
+  cursor: pointer;
 }
 
 .add form input:hover {
   border-bottom: rgba(122, 6, 0) solid;
+  cursor: pointer;
 }
 
 .add form input:focus {
@@ -262,6 +246,7 @@ ul, li, ol {
 .storage.inactive:hover {
   transform: translateX(0%);
   transition: transform 0.2s ease-in;
+  cursor: pointer;
 }
 
 .storage h2 {

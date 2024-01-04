@@ -99,13 +99,11 @@ const Home = () => {
             <li>
               Running Low on X Items!
               <ol className="click-me">Click to view items that are running low.</ol>
-            </li> 
-            <li className="settings">
-              <button>Settings</button>
             </li>
-            <li className="logout">
+            <div className="nav-btn-container">
               <button>Logout</button>
-            </li>
+              <button>Settings</button>
+            </div> 
           </ul>
         </nav>
 
