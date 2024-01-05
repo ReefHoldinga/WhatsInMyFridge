@@ -263,6 +263,18 @@ ul, li, ol {
   margin: 0;
 }
 
+.fa-solid.fa-lock-open {
+  visibility: visible;
+  position: absolute;
+  z-index: 0;
+}
+
+.fa-solid.fa-lock {
+  visibility: hidden;
+  position: absolute;
+  z-index: 1;
+}
+
 /* .retracted-card {
   background-color: rgb(255, 105, 97);
   border: solid rgba(122, 6, 0) 2px;

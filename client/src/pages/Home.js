@@ -55,6 +55,27 @@ const Home = () => {
     document.querySelector('.add').style.visibility='visible';
   };
 
+  const toggleLock = (e) => {
+    e.preventDefault();
+
+    const open = document.querySelector('.fa-solid.fa-lock-open');
+    const closed = document.querySelector('.fa-solid.fa-lock');
+    const container = e.target.parentNode.parentNode;
+    console.log(container)
+
+    console.log(closed.style.visibility)
+
+    if (e.target.className === 'fa-solid fa-lock-open') {
+      open.style.visibility='hidden';
+      closed.style.visibility='visible';
+      container.classList.remove('inactive');
+    } else {
+      open.style.visibility='visible';
+      closed.style.visibility='hidden';
+      container.classList.add('inactive');
+    }
+  }
+
   const addItem = async (e) => {
     let item = {
       name: food,
@@ -138,7 +159,7 @@ const Home = () => {
           <div className="form-nav-container">
             <i className="fa-solid fa-x" onClick={closePopup}></i>
             <p>Please fill out all form options!</p>
-            <i class="fa-solid fa-arrow-right" onClick={addItem}></i>
+            <i className="fa-solid fa-arrow-right" onClick={addItem}></i>
           </div>
         </div>
 
@@ -159,11 +180,16 @@ const Home = () => {
           <aside className="storage inactive">
             <h2>Fridge <i className="fa-solid fa-plus" onClick={toggleOverlay}></i></h2>
           </aside>
-          <aside className="storage">
-            <h2>Pantry</h2>
+          <aside className="storage inactive">
+            <h2>
+              Pantry 
+              <i className="fa-solid fa-plus" onClick={toggleOverlay}></i>
+              <i className="fa-solid fa-lock" onClick={toggleLock}></i>
+              <i className="fa-solid fa-lock-open" onClick={toggleLock}></i>
+            </h2>
           </aside>
           <aside className="storage inactive">
-            <h2>Freezer</h2>
+            <h2>Freezer <i className="fa-solid fa-plus" onClick={toggleOverlay}></i></h2>
           </aside>
         </div>
       </div> 
